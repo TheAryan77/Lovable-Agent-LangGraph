@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Sparkles, XCircle, Bot, Eye, EyeOff, Plus, SlidersHorizontal, ChevronDown, Mic } from 'lucide-react'
 import './App.css'
 
@@ -10,12 +10,23 @@ interface Message {
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
+const placeholderPrompts = [
+  'Build a Spotify clone for me!',
+  'Can you draft an Uber-style booking flow?',
+  'Write efficient Dijkstra code in TypeScript.',
+  'Design a playful fintech dashboard UI.',
+  "Generate copy for Aryan's new landing page.",
+  'Prototype a meditation coach mobile app.'
+];
+
 function App() {
   const [prompt, setPrompt] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
   const [showLogs, setShowLogs] = useState(false)
+  const [placeholderIndex, setPlaceholderIndex] = useState(0)
+  const [isPlaceholderFading, setIsPlaceholderFading] = useState(false)
   const quickActions = [
     'Build a web app',
     'Write some code',
@@ -26,6 +37,27 @@ function App() {
   ]
   const inputRef = useRef<HTMLTextAreaElement | null>(null)
   const isStreaming = status === 'loading'
+  const activePlaceholder = placeholderPrompts[placeholderIndex % placeholderPrompts.length]
+
+  useEffect(() => {
+    if (placeholderPrompts.length <= 1) return
+    let fadeTimeout: number | undefined
+    const intervalId = window.setInterval(() => {
+      setIsPlaceholderFading(true)
+      fadeTimeout = window.setTimeout(() => {
+        setPlaceholderIndex(prev => (prev + 1) % placeholderPrompts.length)
+        setIsPlaceholderFading(false)
+      }, 250)
+    }, 2000)
+
+    return () => {
+      window.clearInterval(intervalId)
+      if (fadeTimeout) {
+        window.clearTimeout(fadeTimeout)
+      }
+    }
+  }, [])
+
   const handleQuickAction = (action: string) => {
     setPrompt(action)
     inputRef.current?.focus()
@@ -130,7 +162,7 @@ function App() {
                 <span className="welcome-hi">Hi Aryan</span>
               </div>
               <h2 className="welcome-title">Where should we start?</h2>
-              <p className="welcome-subtitle">Ask anything and I'll not even help you, I'll build it.</p>
+              <p className="welcome-subtitle">Ask anything. I won’t just help — I’ll build it.</p>
               
               <form onSubmit={handleSubmit} className="input-card-form">
                 <div className="gemini-input-card">
@@ -139,8 +171,8 @@ function App() {
                       ref={inputRef}
                       value={prompt}
                       onChange={(e) => setPrompt(e.target.value)}
-                      placeholder="Build a spotify clone for me!"
-                      className="gemini-input"
+                      placeholder={activePlaceholder}
+                      className={`gemini-input placeholder-transition ${isPlaceholderFading ? 'placeholder-fade' : ''}`}
                       rows={1}
                       disabled={isStreaming}
                       onKeyDown={(e) => {
@@ -270,8 +302,8 @@ function App() {
               ref={inputRef}
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Describe what you want to build..."
-              className="main-input"
+              placeholder={activePlaceholder}
+              className={`main-input placeholder-transition ${isPlaceholderFading ? 'placeholder-fade' : ''}`}
               rows={1}
               disabled={isStreaming}
               onKeyDown={(e) => {

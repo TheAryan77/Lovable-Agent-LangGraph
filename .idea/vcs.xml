@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/generated_projects/build_me_a_spotify_clone_in_html_css_jav_20260129_212818_4d63cd/Spotify-Clone" vcs="Git" />
   </component>
 </project>

@@ -47,3 +47,4 @@ app.post("/api/generate", async (req, res) => {
 app.listen(3000, () => {
   console.log("Node API running on port 3000");
 });
+

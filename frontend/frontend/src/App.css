@@ -24,7 +24,8 @@ body {
 .brand-badge {
   position: absolute;
   top: 24px;
-  left: 32px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -35,20 +36,23 @@ body {
 }
 
 .brand-icon {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   color: #a78bfa;
 }
 
 .brand-name {
   color: #ffffff;
   font-weight: 600;
+  font-size: 25px;
+  letter-spacing: 0.5px;
 }
 
 .brand-by {
-  font-size: 12px;
+  font-size: 16px;
+  font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
+  /* letter-spacing: 0.3em; */
   color: rgba(255, 255, 255, 0.45);
 }
 
@@ -158,14 +162,15 @@ body {
 }
 
 .welcome-icon {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   color: #a78bfa;
   animation: pulse 2s ease-in-out infinite;
 }
 
 .welcome-hi {
   font-size: 24px;
+  /* font-weight: lighter; */
   color: rgba(255, 255, 255, 0.85);
 }
 
@@ -181,7 +186,7 @@ body {
 }
 
 .welcome-title {
-  font-size: 56px;
+  font-size: 40px;
   font-weight: 400;
   color: #ffffff;
   margin-bottom: 2px;
@@ -189,7 +194,7 @@ body {
 }
 
 .welcome-subtitle {
-  font-size: 32px;
+  font-size: 22px;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 400;
   margin-bottom: 16px;
@@ -238,13 +243,22 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
+.placeholder-transition::placeholder {
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.placeholder-fade::placeholder {
+  opacity: 0;
+}
+
 .gemini-send {
   width: 42px;
   height: 42px;
   border-radius: 50%;
   border: none;
   background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+  color: #a78bfa;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,7 +329,7 @@ body {
 .quick-action {
   padding: 12px 24px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.6);
   background: rgba(255, 255, 255, 0.04);
   color: rgba(255, 255, 255, 0.85);
   font-size: 14px;
@@ -324,7 +338,8 @@ body {
 }
 
 .quick-action:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.9);
 }
 
 .conversation {

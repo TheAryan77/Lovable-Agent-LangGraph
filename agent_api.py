@@ -37,7 +37,7 @@ async def event_stream(prompt: str):
     log_queue = queue.Queue()
     
     # Send initial message
-    yield f"data: {json.dumps({'type': 'message', 'content': '🤖 Hey! I got your request. Let me start building that for you...'})}\n\n"
+    yield f"data: {json.dumps({'type': 'message', 'content': 'Hey! I got your request. Let me start building that for you...'})}\n\n"
     await asyncio.sleep(0.3)
     
     # Start capturing logs
