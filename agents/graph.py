@@ -36,7 +36,7 @@ def planner_agent(state : dict) -> dict:
     project_root = create_project_root(user_prompt)
     tools.PROJECT_ROOT = project_root
     resp = llm.with_structured_output(Plan).invoke(planner_prompt(user_prompt))
-    return {"plan": resp}
+    return {"plan": resp, "project_root": str(project_root)}
 
 def architect_agent(state : dict) -> dict:
     plan = state["plan"]

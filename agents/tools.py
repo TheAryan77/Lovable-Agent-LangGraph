@@ -28,6 +28,8 @@ def write_file(path: str, content: str) -> str:
     p.write_text(content, encoding="utf-8")
 
     return f"WROTE:{p}"
+
+
 @tool
 def read_file(path: str) -> str:
     """Reads content from a file at the specified path within the project root."""
